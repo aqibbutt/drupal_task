@@ -1,0 +1,8 @@
+core = 7.x
+name = "My Module"
+package = My Modules
+description = "A module for submitting form data into the database"
+configure = admin/config/content/my_module
+files[] = my_module.info
+files[] = my_module.install
+files[] = my_module.module

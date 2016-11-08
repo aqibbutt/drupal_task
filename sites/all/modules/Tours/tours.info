@@ -1,0 +1,4 @@
+name = "tours"
+package = Tours
+core = 7.x
+description = tours

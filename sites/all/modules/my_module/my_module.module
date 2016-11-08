@@ -1,0 +1,99 @@
+<?php
+/**
+ * Implements hook_node_info()
+ */
+function my_module_node_info() {
+    return array(
+        'product' => array(
+            'name' => t('Product'),
+            'base' => 'product',
+            'description' => t('You can define new Products here'),
+            'has_title' => TRUE,
+            'title_label' => t('Product title'),
+         )
+    );
+}
+function my_module_menu() {
+  $items['formtest'] = array(
+    'title' => 'Form Test',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('my_module_form'),
+    'access callback' => TRUE,
+    );
+  return $items;
+}
+function my_module_form($form,&$form_submit) {
+    
+    
+  $form['title'] = array(
+    '#title' => t('Title'),
+    '#type' => 'textfield',
+    '#required' => TRUE,
+  );
+  $form['description'] = array(
+    '#title' => t('Description'),
+    '#type' => 'textfield',
+  );
+  $form['startdate'] = array(
+    '#title' => t('Start Date'),
+    '#type' => 'date',
+  );
+  $form['enddate'] = array(
+    '#title' => t('End Date'),
+    '#type' => 'date',
+  );
+  $form['volume'] = array(
+    '#title' => t('Volume'),
+    '#type' => 'textfield',
+  );
+  $form['submit'] = array(
+    '#value' => 'Submit',
+    '#type' => 'submit',
+      '#name' => 'submit'
+    );
+//  die(var_dump($form_submit));
+  return $form;
+}
+/**
+ * Add a submit handler/function to the form.
+ *
+ * This will add a completion message to the screen when the
+ * form successfully processes
+ */
+//function my_module_submit($form, &$form_state) {
+//    $first_name = $form_state['values']['firstname']; 
+//    $last_name = $form_state['values']['lastname'];
+//    
+//    //drupal_goto("/drupal_task");
+////	drupal_set_message(t('The form has been submitted.'));
+//}
+function my_module_submit($form, &$form_state)
+{
+  // we return the submitted value to the form
+  // by storing it in $form_state['storage'] and rebuilding
+    die(var_dump($form));
+  $form_state['storage']['some_value'] = $form_state['values']['some_value'];
+  $form_state['rebuild'] = TRUE;
+}
+
+// We need to register our theme function using hook_theme()
+function my_module_theme()
+{
+  return array
+  (
+    'some_theme' => array
+    (
+      'render element' => 'form',
+    ),
+  );
+}
+
+// Finally we define our theme function
+function theme_some_theme($variables)
+{
+  $element = $variables['form'];
+  $output = '' . t('This is the value that was submitted') . '';
+  $output .= '' . $element['#value'] . '';
+
+  return $output;
+}
