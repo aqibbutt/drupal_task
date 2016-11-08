@@ -1,0 +1,11 @@
+<?php
+function tours_menu()
+{
+   $item['formtour']=array(
+       'title' => 'Tour',
+       'page callback' => 'drupal_get_form',
+       'page_arguments' => array('tours_form'),
+       'access callback' => TRUE,
+   );
+   return $items;
+}
