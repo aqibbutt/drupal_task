@@ -15,7 +15,7 @@
 //}
 function tours_menu()
 {
-   $items['tours']=array(
+   $items['tours/add']=array(//to creating the Url
        'title' => 'tours',
        'page callback' => 'drupal_get_form',
        'page arguments' => array('tours_form'),
@@ -56,6 +56,7 @@ function tours_form($form,&$form_submit)
         '#type' => 'submit',
         '#name' => 'submit'
     );
+    print_r(node_load(11));
     return $form;
 }
 
@@ -82,6 +83,9 @@ function tours_form_submit($form,&$form_state)
 //  );
   // 'node' is default,
   // Other possible values are "user" and  "taxonomy_term" 
+$node->field_start_date['und'][0]['value'] = $form_state['values']['startdate'];
+$node->field_finish_date['und'][0]['value'] = $form_state['values']['enddate'];
+$node->field_volume['und'][0]['value'] = $form_state['values']['volume'];
 
   $node = node_submit($node); // Prepare node for saving
   node_save($node);
