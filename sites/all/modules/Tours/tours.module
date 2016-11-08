@@ -9,3 +9,33 @@ function tours_menu()
    );
    return $items;
 }
+function tours_form($form,&$form_submit)
+{
+    $form['title']=array(
+        '#title'=>t('Title'),
+        '#type'=>'textfield',
+        '#required' => TRUE
+    );
+    $form['description']=array(
+        '#title'=>t('Description'),
+        '#type'=>'textarea',
+        '#required' => TRUE
+    );
+    $form['startdate']=array(
+        '#title'=>t('Start Date'),
+        '#type'=>'date',
+        '#required' => TRUE
+    );
+    $form['enddate']=array(
+        '#title'=>t('End Date'),
+        '#type'=>'date',
+        '#required' => TRUE
+    );
+    $form['volume']=array(
+        '#title'=>t('Volume'),
+        '#type'=>'textfield',
+        '#required' => TRUE
+    );
+    
+    
+}
